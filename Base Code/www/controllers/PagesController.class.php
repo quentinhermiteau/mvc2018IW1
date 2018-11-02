@@ -1,9 +1,8 @@
 <?php
-class PagesController{
-	
-	public function defaultAction(){
-		echo "pages default";
-	}
-	
 
+class PagesController {
+    public function defaultAction() {
+        $view = new View('home', 'front');
+        $view->assign('pseudo', 'prof');
+    }
 }
