@@ -9,3 +9,11 @@
 '/ajouter_un_utilisateur':
   controller: Users
   action: add
+
+'/connexion':
+  controller: Users
+  action: login
+
+'/mot_de_passe_oublie':
+  controller: Users
+  action: forgetPassword

@@ -2,7 +2,6 @@
 
 class PagesController {
     public function defaultAction() {
-        $view = new View('home', 'front');
-        $view->assign('pseudo', 'prof');
+        $view = new View('welcome', 'back');
     }
 }
