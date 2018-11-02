@@ -1,11 +1,11 @@
-"/":
+'/':
   controller: Pages
   action: default
 
-"/liste_des_utilisateurs":
+'/liste_des_utilisateurs':
   controller: Users
   action: default
 
-"/ajouter_un_utilisateur":
+'/ajouter_un_utilisateur':
   controller: Users
   action: add
