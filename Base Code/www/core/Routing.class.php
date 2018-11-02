@@ -1,27 +1,39 @@
 <?php
-class Routing{
 
-	public static $routeFile = "routes.yml";
+class Routing {
+    public static $routeFile = 'routes.yml';
 
-	public static function getRoute($slug){
+    public static function getRoute($slug) {
+        $routes = yaml_parse_file(self::$routeFile);
 
-		// /creation_de_compte_allocine
-		//récuperer toutes les routes dans le fichier yml
-		$routes = yaml_parse_file(self::$routeFile);
-		if( isset($routes[$slug])){
-			if(empty($routes[$slug]["controller"]) || empty($routes[$slug]["action"])){
-				die("Il y a une erreur dans le fichier routes.yml");
-			}
-			$c = ucfirst($routes[$slug]["controller"])."Controller";
-			$a = $routes[$slug]["action"]."Action";
-			$cPath = "controllers/".$c.".class.php";
+        if(isset($slug, $routes)) {
+            if(empty($routes[$slug]['controller']) || empty($routes[$slug]['action'])) {
+                die('Error append in routes.yml file');
+            }
 
-		}else{
-			return null;
-		}
-
-		return ["c"=>$c, "a"=>$a,"cPath"=>$cPath ];
-	}
+            $controller = ucfirst($routes[$slug]['controller']) . 'Controller';
+            $controllerPath = 'controllers/' . $controller . '.class.php';
+            $action = $routes[$slug]['action'] . 'Action';
+        } else {
+            return null;
+        }
 
 
+        return ['controller' => $controller, 'action' => $action, 'controllerPath' => $controllerPath];
+    }
+
+    public static function getSlug($controller, $action) {
+        $routes = yaml_parse_file(self::$routeFile);
+
+        $controller = explode('Controller', $controller)[0]; //UsersController -> Users
+        $action = explode('Action', $action)[0]; // addAction -> add
+        
+        foreach($routes as $slug => $values) {
+            if(!empty($values['controller']) && !empty($values['action']) && $values['controller'] == $controller && $values['action'] == $action) {
+                return $slug;
+            }
+        }
+
+        return null;
+    }
 }
