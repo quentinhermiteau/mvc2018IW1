@@ -2,6 +2,6 @@
 
 class PagesController {
     public function defaultAction() {
-        $view = new View('welcome', 'back');
+        $view = new View('homepage', 'back');
     }
 }
