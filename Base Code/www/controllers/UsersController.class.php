@@ -6,7 +6,13 @@ class UsersController {
     }
 
     public function addAction() {
-        $view = new View('addUser', 'front');
+        $user = new Users();
+        $user->setFirstname("Yves");
+		$user->setLastname("skrzypczyk");
+		$user->setEmail("y.skrzypczyk@gmail.com");
+		$user->setPwd("Test1234");
+		$user->save();
+        // $view = new View('addUser', 'front');
     }
 
     public function loginAction() {
