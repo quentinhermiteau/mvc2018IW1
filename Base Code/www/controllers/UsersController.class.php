@@ -7,9 +7,9 @@ class UsersController {
 
     public function addAction() {
         $user = new Users();
-        $user->setFirstname("Yves");
-		$user->setLastname("skrzypczyk");
-		$user->setEmail("y.skrzypczyk@gmail.com");
+        $user->setFirstname("quentin");
+		$user->setLastname("hermiteau");
+		$user->setEmail("quentinhermiteau@gmail.com");
 		$user->setPwd("Test1234");
 		$user->save();
         // $view = new View('addUser', 'front');
