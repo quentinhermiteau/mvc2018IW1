@@ -1,10 +1,16 @@
 <?php
 
+require "conf.inc.php";
+
 spl_autoload_register(function($class) {
     $classPath = 'core/' . $class . '.class.php';
-    if(file_exists($classPath)) {
-        include($classPath);
-    }
+    $classModel = "models/".$class.".class.php";
+
+    if(file_exists($classPath)){
+		include $classPath;
+	}else if(file_exists($classModel)){
+		include $classModel;
+	}
 });
 
 $slug = $_SERVER['REQUEST_URI'];
