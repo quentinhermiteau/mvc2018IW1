@@ -16,7 +16,7 @@ class View {
         if(file_exists($viewPath)) {
             $this->view = $viewPath;
         } else {
-            die('The view file "' . $viewPath . '" doesn\'t exist');
+            throw new \Exception('The view file "' . $modalPath . '" doesn\'t exist');
         }
     }
 
@@ -26,7 +26,17 @@ class View {
         if(file_exists($templatePath)) {
             $this->template = $templatePath;
         } else {
-            die('The template file "' . $templatePath . '" doesn\'t exist');
+            throw new \Exception('The template file "' . $modalPath . '" doesn\'t exist');
+        }
+    }
+
+    public function addModal($modal, $config, $data = null) {
+        $modalPath = 'views/modals/' . $modal . '.mod.php';
+        
+        if(file_exists($modalPath)) {
+            include $modalPath;
+        } else {
+            throw new \Exception('The modal file "' . $modalPath . '" doesn\'t exist');
         }
     }
 
