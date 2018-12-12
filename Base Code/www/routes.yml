@@ -10,6 +10,10 @@
   controller: Users
   action: add
 
+'/enregistre_un_utilisateur':
+  controller: Users
+  action: save
+
 '/connexion':
   controller: Users
   action: login
