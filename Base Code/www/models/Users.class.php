@@ -43,10 +43,46 @@ class Users extends BaseSQL{
                 'method' => 'POST',
                 'action' => Routing::getSlug('Users', 'save'),
                 'class' => '',
-                'id' => ''
+                'id' => '',
+                'submit' => 'S\'inscrire',
+                'reset' => 'Annuler',
             ],
             'data' => [
-
+                'firstname'  => [
+                    'type' => 'text',
+                    'placeholder' => 'Votre prénom',
+                    'required' => true,
+                    'class' => 'form-control',
+                    'id' => 'firstname',
+                ],
+                'lastname'  => [
+                    'type' => 'text',
+                    'placeholder' => 'Votre nom',
+                    'required' => true,
+                    'class' => 'form-control',
+                    'id' => 'lastname',
+                ],
+                'email'     => [
+                    'type' => 'email',
+                    'placeholder' => 'Votre email',
+                    'required' => true, 'class' =>
+                    'form-control',
+                    'id' => 'email',
+                ],
+                'pwd'       => [
+                    'type' => 'password',
+                    'placeholder' => 'Votre mot de passe',
+                    'required' => true,
+                    'class' => 'form-control',
+                    'id' => 'pwd',
+                ],
+                'pwdConfirm' => [
+                    'type' => 'password',
+                    'placeholder' => 'Confirmation',
+                    'required' => true,
+                    'class' => 'form-control',
+                    'id' => 'pwdConfirm',
+                ],
             ]
         ];
     }
