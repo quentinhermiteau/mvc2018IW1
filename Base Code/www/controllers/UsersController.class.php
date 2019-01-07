@@ -14,7 +14,11 @@ class UsersController {
     }
 
     public function saveAction() {
+        $user = new Users();
+        $form = $user->getRegisterForm();
+
         $view = new View('addUser', 'front');
+        $view->assign('form', $form);
     }
 
     public function loginAction() {
