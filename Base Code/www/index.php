@@ -4,7 +4,7 @@ require "conf.inc.php";
 
 spl_autoload_register(function($class) {
     $classPath = 'core/' . $class . '.class.php';
-    $classModel = "models/".$class.".class.php";
+    $classModel = 'models/' . $class . '.class.php';
 
     if(file_exists($classPath)){
 		include $classPath;
