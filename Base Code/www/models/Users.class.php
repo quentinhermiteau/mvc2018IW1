@@ -54,6 +54,9 @@ class Users extends BaseSQL{
                     'required' => true,
                     'class' => 'form-control',
                     'id' => 'firstname',
+                    'minlength' => 2,
+                    'maxlength' => 50,
+                    'error' => 'Le prénom doit faire entre 2 et 50 caractères.',
                 ],
                 'lastname'  => [
                     'type' => 'text',
@@ -61,13 +64,18 @@ class Users extends BaseSQL{
                     'required' => true,
                     'class' => 'form-control',
                     'id' => 'lastname',
+                    'minlength' => 2,
+                    'maxlength' => 100,
+                    'error' => 'Le nom doit faire entre 2 et 100 caractères.',
                 ],
                 'email'     => [
                     'type' => 'email',
                     'placeholder' => 'Votre email',
-                    'required' => true, 'class' =>
-                    'form-control',
+                    'required' => true,
+                    'class' => 'form-control',
                     'id' => 'email',
+                    'maxlength' => 250,
+                    'error' => 'L\'email n\'est pas valide ou il dépasse les 250 caractères.',
                 ],
                 'pwd'       => [
                     'type' => 'password',
@@ -75,6 +83,8 @@ class Users extends BaseSQL{
                     'required' => true,
                     'class' => 'form-control',
                     'id' => 'pwd',
+                    'minlength' => 6,
+                    'error' => 'Le mot de passe doit faire au minimum de 6 caractères avec des minuscules, majuscules et chiffres.',
                 ],
                 'pwdConfirm' => [
                     'type' => 'password',
@@ -82,6 +92,8 @@ class Users extends BaseSQL{
                     'required' => true,
                     'class' => 'form-control',
                     'id' => 'pwdConfirm',
+                    'confirm' => 'pwd',
+                    'error' => 'Les mots de passe ne correspondent pas.',
                 ],
             ]
         ];
