@@ -2,15 +2,15 @@
 
 require "conf.inc.php";
 
-spl_autoload_register(function($class) {
+spl_autoload_register(function ($class) {
     $classPath = 'core/' . $class . '.class.php';
     $classModel = 'models/' . $class . '.class.php';
 
-    if(file_exists($classPath)){
-		include $classPath;
-	}else if(file_exists($classModel)){
-		include $classModel;
-	}
+    if (file_exists($classPath)) {
+        include $classPath;
+    } elseif (file_exists($classModel)) {
+        include $classModel;
+    }
 });
 
 $slug = $_SERVER['REQUEST_URI'];
@@ -30,13 +30,13 @@ require 'core/Routing.class.php';
 $cap = Routing::getRoute($slug);
 extract($cap);
 
-if(file_exists($controllerPath)) {
+if (file_exists($controllerPath)) {
     include $controllerPath;
     
-    if(class_exists($controller)) {
+    if (class_exists($controller)) {
         $object = new $controller();
         
-        if(method_exists($object, $action)) {
+        if (method_exists($object, $action)) {
             $object->$action();
 
             $slug = Routing::getSlug($controller, $action);
@@ -46,7 +46,6 @@ if(file_exists($controllerPath)) {
     } else {
         die('The class "' . $controller . '" doesn\'t exist');
     }
-    
 } else {
     die('Controller file "' . $controller . '" doesn\'t exist');
 }

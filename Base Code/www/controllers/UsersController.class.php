@@ -1,11 +1,21 @@
 <?php
 
-class UsersController {
-    public function defaultAction() {
+declare(strict_types=1);
+
+namespace Controllers;
+
+use Models\View;
+use Core\Validator;
+
+class UsersController
+{
+    public function defaultAction(): void
+    {
         echo("Users default");
     }
 
-    public function addAction() {
+    public function addAction(): void
+    {
         $user = new Users();
         $form = $user->getRegisterForm();
 
@@ -13,7 +23,8 @@ class UsersController {
         $view->assign('form', $form);
     }
 
-    public function saveAction() {
+    public function saveAction(): void
+    {
         $user = new Users();
         $form = $user->getRegisterForm();
 
@@ -30,7 +41,6 @@ class UsersController {
                 $user->setPwd($data['pwd']);
                 $user->save();
             } else {
-
             }
         }
 
@@ -38,11 +48,13 @@ class UsersController {
         $view->assign('form', $form);
     }
 
-    public function loginAction() {
+    public function loginAction(): void
+    {
         $view = new View('loginUser', 'front');
     }
 
-    public function forgetPasswordAction() {
+    public function forgetPasswordAction(): void
+    {
         $view = new View('forgetPassword', 'front');
     }
 }

@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Core;
+
 class Validator
 {
     public $errors = [];
 
-    public function __construct($config, $data)
+    public function __construct(array $config, array $data)
     {
         if (count($config['data']) != count($data)) {
             throw new \Exception('Erreur: tentative faille XSS.');
@@ -32,37 +36,35 @@ class Validator
                 
                 if (isset($info['confirm']) && $data[$name] != $data[$info['confirm']]) {
                     $this->errors[] = $info['error'];
-                } else if ($info['type'] === 'password' && !self::checkPassword($data[$name])) {
+                } elseif ($info['type'] === 'password' && !self::checkPassword($data[$name])) {
                     $this->errors[] = $info['error'];
                 }
-
-                
             }
         }
     }
 
-    private static function notEmpty($string)
+    private static function notEmpty(string $string): bool
     {
         return !empty(trim($string));
     }
 
-    private static function minLength($string, $length)
+    private static function minLength(string $string, int $length): bool
     {
         return strlen(trim($string)) >= $length;
     }
     
-    private static function maxLength($string, $length)
+    private static function maxLength(string $string, int $length): bool
     {
         return strlen(trim($string)) <= $length;
     }
 
-    private static function checkEmail($string)
+    private static function checkEmail(string $email): bool
     {
-        return filter_var(trim($string), FILTER_VALIDATE_EMAIL);
+        return filter_var(trim($email), FILTER_VALIDATE_EMAIL);
     }
 
-    private static function checkPassword($string)
+    private static function checkPassword(string $password): bool
     {
-        return (preg_match("#[a-z]#", $string) && preg_match("#[A-Z]#", $string) && preg_match("#[0-9]#", $string));
+        return (preg_match("#[a-z]#", $password) && preg_match("#[A-Z]#", $password) && preg_match("#[0-9]#", $password));
     }
 }

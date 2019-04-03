@@ -1,6 +1,13 @@
 <?php
 
-class Users extends BaseSQL{
+declare(strict_types=1);
+
+namespace Models;
+
+use Core\BaseSQL;
+
+class Users extends BaseSQL
+{
     public $id = null;
     public $firstname;
     public $lastname;
@@ -9,35 +16,43 @@ class Users extends BaseSQL{
     public $role = 1;
     public $status = 0;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
     
-    public function setFirstname($firstname) {
+    public function setFirstname(string $firstname): void
+    {
         $this->firstname = ucwords(strtolower(trim($firstname)));
     }
     
-    public function setLastname($lastname) {
+    public function setLastname(string $lastname): void
+    {
         $this->lastname = strtoupper(trim($lastname));
     }
     
-    public function setEmail($email) {
+    public function setEmail(string $email): void
+    {
         $this->email = strtolower(trim($email));
     }
     
-    public function setPwd($pwd) {
+    public function setPwd(string $pwd): void
+    {
         $this->pwd = password_hash($pwd, PASSWORD_DEFAULT);
     }
     
-    public function setRole($role) {
+    public function setRole(int $role): void
+    {
         $this->role = $role;
     }
     
-    public function setStatus($status) {
+    public function setStatus(int $status): void
+    {
         $this->status = $status;
     }
     
-    public function getRegisterForm() {
+    public function getRegisterForm(): array
+    {
         return [
             'config' => [
                 'method' => 'POST',

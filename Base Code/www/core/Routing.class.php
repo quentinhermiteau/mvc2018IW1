@@ -1,13 +1,19 @@
 <?php
 
-class Routing {
+declare(strict_types=1);
+
+namespace Core;
+
+class Routing
+{
     public static $routeFile = 'routes.yml';
 
-    public static function getRoute($slug) {
+    public static function getRoute(string $slug): ?array
+    {
         $routes = yaml_parse_file(self::$routeFile);
 
-        if(isset($slug, $routes)) {
-            if(empty($routes[$slug]['controller']) || empty($routes[$slug]['action'])) {
+        if (isset($slug, $routes)) {
+            if (empty($routes[$slug]['controller']) || empty($routes[$slug]['action'])) {
                 die('Error append in routes.yml file');
             }
 
@@ -22,14 +28,15 @@ class Routing {
         return ['controller' => $controller, 'action' => $action, 'controllerPath' => $controllerPath];
     }
 
-    public static function getSlug($controller, $action) {
+    public static function getSlug(string $controller, string $action): ?string
+    {
         $routes = yaml_parse_file(self::$routeFile);
 
         $controller = explode('Controller', $controller)[0]; //UsersController -> Users
         $action = explode('Action', $action)[0]; // addAction -> add
         
-        foreach($routes as $slug => $values) {
-            if(!empty($values['controller']) && !empty($values['action']) && $values['controller'] == $controller && $values['action'] == $action) {
+        foreach ($routes as $slug => $values) {
+            if (!empty($values['controller']) && !empty($values['action']) && $values['controller'] == $controller && $values['action'] == $action) {
                 return $slug;
             }
         }
